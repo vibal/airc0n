@@ -1,1 +1,119 @@
-<h1>mikal mikal mikal</h1>
+<html lang="en">
+<head>
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="651505008138-0en90fb17dvn10d2v7i949elchcf6obh.apps.googleusercontent.com">
+  <meta charset="utf-8" />
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <title>airc0n</title>
+</head>
+<body>
+<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+<button class="signout" onclick="signOut();"></button>
+    
+
+
+<script>
+$(document).ready(function() { 
+ //if(id_token){
+ // alert(id_token);
+ //}
+ $('.signout').hide();
+}); 
+
+// Client ID and API key from the Developer Console
+//var CLIENT_ID = '116309523477551711051';
+var CLIENT_ID = '651505008138-0en90fb17dvn10d2v7i949elchcf6obh.apps.googleusercontent.com';
+var API_KEY = 'AIzaSyDHkmHjxJRGXOLVUhKmxTjz4dn69GUqwFU';
+//var API_KEY = 'mVS565I6p5P9Ak6OdDEsJItK';
+// Array of API discovery doc URLs for APIs used by the quickstart
+var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+
+// Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
+
+/**
+ *  On load, called to load the auth2 library and API client library.
+ */
+function handleClientLoad() {
+  gapi.load('client', initClient);
+}
+
+/**
+ *  Initializes the API client library and sets up sign-in state
+ *  listeners.
+ */
+function initClient() {
+  gapi.client.init({
+    apiKey: API_KEY,
+    clientId: CLIENT_ID,
+    discoveryDocs: DISCOVERY_DOCS,
+    scope: SCOPES
+  }).then(function () {
+    listMajors();
+  }, function(error) {
+    appendPre(JSON.stringify(error, null, 2));
+  });
+}
+
+
+
+
+
+function onSignIn(googleUser) {
+  // Useful data for your client-side scripts:
+  var profile = googleUser.getBasicProfile();
+  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+  console.log('Full Name: ' + profile.getName());
+  console.log('Given Name: ' + profile.getGivenName());
+  console.log('Family Name: ' + profile.getFamilyName());
+  console.log("Image URL: " + profile.getImageUrl());
+  console.log("Email: " + profile.getEmail());
+
+  // The ID token you need to pass to your backend:
+  var id_token = googleUser.getAuthResponse().id_token;
+  console.log("ID Token: " + id_token);
+
+  if(id_token){
+    $('.signout').html('Signout '+profile.getName());
+    $('.signout').show();
+    $('.g-signin2').hide();
+    magwrite();
+  }
+}
+ 
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+    $('.signout').hide();
+    $('.g-signin2').show();
+  });
+}
+
+
+
+function magwrite(){
+    gapi.client.sheets.spreadsheets.values.update({
+        spreadsheetId: '11wbbgkr2eNk5OW1W1jILs4icsmCwcqtOt0HYTbak3MY',
+        range: 'lsb-sheet1!C1',
+        valueInputOption: "RAW",
+        values: [ ["yes"] ]
+    }).then(function(response) {
+        console.log(response);
+        console.log('nonoon');
+    });
+}
+
+
+</script>
+
+
+<script async defer src="https://apis.google.com/js/api.js"
+  onload="this.onload=function(){};handleClientLoad()"
+  onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+
+  </body>
+</html>
