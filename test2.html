@@ -6,13 +6,14 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <p>Google Sheets API Quickstart</p>
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
+
+    <img src="https://via.placeholder.com/300" id='aircon_snapshot'/>
 
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
@@ -101,6 +102,11 @@
         pre.appendChild(textContent);
       }
 
+function imahe(img){
+  var imahe = document.getElementById('aircon_snapshot');
+  imahe.innerHTML = "<img src='"+img+"'/>";
+}
+
       /**
        * Print the names and majors of students in a sample spreadsheet:
        * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
@@ -116,6 +122,7 @@
               var row = range.values[i];
               // Print columns A and E, which correspond to indices 0 and 4.
               appendPre(row[0] + ', ' + row[2]);
+              imahe(row[0]);
             }
           } else {
             appendPre('No data found.');
