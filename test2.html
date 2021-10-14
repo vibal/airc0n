@@ -8,17 +8,20 @@
 <style type="text/css">
 *{font-family: 'Roboto Mono', monospace;font-size: 13px}
 body{background: #0F111D;color:#d6f6fb;}
-#aircon_snapshot{width:200px;margin:100px auto;}
+#aircon_snapshot{width:200px;margin:10px auto;}
+#panglogin{width:200px;margin:10px auto;}
 #ac{border:2px solid #d6f6fb;border-radius: 8px;width:200px;}
 </style>
 <title>airc0n</title>
 </head>
 <body>
 
-  <!--Add buttons to initiate auth sequence and sign out-->
-  <button id="authorize_button" style="display: none;">Authorize</button>
-  <button id="signout_button" style="display: none;">Sign Out</button>
-  
+  <div id='aircon_snapshot'>
+  <button id="authorize_button" style="width:100%; display: none;">Login via Google</button>
+  <button id="signout_button" style="width:100%; display: none;">Sign Out <b id="pangaran"></b></button>
+  </div>
+
+
   <div id='aircon_snapshot'>
     <img src="https://via.placeholder.com/120x90/000000/d6f6fb?text=AC Snapshot" id="ac"/>
   </div>
@@ -39,7 +42,6 @@ body{background: #0F111D;color:#d6f6fb;}
 
   var authorizeButton = document.getElementById('authorize_button');
   var signoutButton = document.getElementById('signout_button');
-  var aircon_snapshot = document.getElementById('aircon_snapshot');
 
   /**
    *  On load, called to load the auth2 library and API client library.
@@ -77,15 +79,25 @@ body{background: #0F111D;color:#d6f6fb;}
    */
   function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
+      var profile = auth2.currentUser.get().getBasicProfile();
+      console.log('ID: ' + profile.getId());
+      console.log('Full Name: ' + profile.getName());
+      console.log('Given Name: ' + profile.getGivenName());
+      console.log('Family Name: ' + profile.getFamilyName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
-      aircon_snapshot.style.display = 'block';
+      document.getElementById('pangaran').innerHTML = profile.getGivenName();
+      document.getElementById('aircon_snapshot').style.display = 'block';
       listMajors();
       magwrite();
+ 
     } else {
       authorizeButton.style.display = 'block';
-      aircon_snapshot.style.display = 'none';
       signoutButton.style.display = 'none';
+      document.getElementById('aircon_snapshot').style.display = 'none';
     }
   }
 
@@ -118,6 +130,7 @@ body{background: #0F111D;color:#d6f6fb;}
         for (i = 0; i < range.values.length; i++) {
           var row = range.values[i];
           imahe(row[0]);
+
         }
       } else {
         console.log('No data found.');
@@ -142,6 +155,8 @@ function magwrite(){
 function imahe(img){
   document.getElementById('aircon_snapshot').innerHTML = "<img src='"+img+"' id='ac'/>";
 }
+
+
 
 </script>
 
