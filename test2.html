@@ -12,8 +12,11 @@
     <button id="signout_button" style="display: none;">Sign Out</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
-
-    <img src="https://via.placeholder.com/300" id='aircon_snapshot'/>
+    
+    <div id='aircon_snapshot'>
+      <img src="https://via.placeholder.com/300" />
+    </div>
+    
 
     <script type="text/javascript">
       // Client ID and API key from the Developer Console
@@ -102,10 +105,7 @@
         pre.appendChild(textContent);
       }
 
-function imahe(img){
-  var imahe = document.getElementById('aircon_snapshot');
-  imahe.innerHTML = "<img src='"+img+"'/>";
-}
+
 
       /**
        * Print the names and majors of students in a sample spreadsheet:
@@ -142,6 +142,11 @@ function magwrite(){
         console.log(response);
         console.log('nonoon');
     });
+}
+
+
+function imahe(img){
+  document.getElementById('aircon_snapshot').innerHTML = "<img src='"+img+"'/>";
 }
 
     </script>
