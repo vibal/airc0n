@@ -8,25 +8,26 @@
 <style type="text/css">
 *{font-family: 'Roboto Mono', monospace;font-size: 13px}
 body{background: #0F111D;color:#d6f6fb;}
-#aircon_snapshot{width:200px;margin:50px auto;}
-#panglogin{width:200px;margin:40px auto;}
+#main{width:200px;margin:100px auto;}
+#panglogin, #aircon_snapshot{width:100%;margin-bottom:10px;}
 #ac{border:2px solid #d6f6fb;border-radius: 8px;width:200px;}
-button{background:#d6f6fb;color: #0F111D;}
+button{background:#d6f6fb;color: #0F111D;padding:5px;}
 </style>
 <title>airc0n</title>
 </head>
 <body>
 
-  <div id='panglogin'>
-  <button id="authorize_button" style="width:100%;border:none; display: none;">Login via Google</button>
-  <button id="signout_button" style="width:100%;border:none; display: none;">Sign Out</button>
-  </div>
+<div id='main'>
 
+  <div id='panglogin'>
+    <button id="authorize_button" style="width:100%;border:none; display: none;">Login via Google</button>
+    <button id="signout_button" style="width:100%;border:none; display: none;">Sign Out</button>
+  </div>
 
   <div id='aircon_snapshot'>
     <img src="https://via.placeholder.com/120x90/000000/d6f6fb?text=AC Snapshot" id="ac"/>
   </div>
-  
+</div>  
 
 <script type="text/javascript">
   document.getElementById('aircon_snapshot').style.display = 'none';
