@@ -68,6 +68,21 @@ body{background: #0F111D;color:#d6f6fb;}
       updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
       authorizeButton.onclick = handleAuthClick;
       signoutButton.onclick = handleSignoutClick;
+
+
+
+
+
+      if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+        var profile = gapi.auth2.currentUser.get().getBasicProfile();
+        console.log('ID: ' + profile.getId());
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+        document.getElementById('pangaran').innerHTML = profile.getGivenName();
+      }
     }, function(error) {
       console.log(JSON.stringify(error, null, 2));
     });
@@ -79,18 +94,9 @@ body{background: #0F111D;color:#d6f6fb;}
    */
   function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
-      var profile = gapi.auth2.currentUser.get().getBasicProfile();
-      console.log('ID: ' + profile.getId());
-      console.log('Full Name: ' + profile.getName());
-      console.log('Given Name: ' + profile.getGivenName());
-      console.log('Family Name: ' + profile.getFamilyName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail());
-
-
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'block';
-      document.getElementById('pangaran').innerHTML = profile.getGivenName();
+      
       document.getElementById('aircon_snapshot').style.display = 'block';
       listMajors();
       magwrite();
