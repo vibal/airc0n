@@ -13,7 +13,7 @@ body{background: #0F111D;color:#d6f6fb;}
 #ac{border:2px solid #d6f6fb;border-radius: 8px;width:100%;}
 button{background:#d6f6fb;color: #0F111D;padding:10px;}
 #loader {
-  margin-top:-150px;margin-bottom:20px;margin-left:35px;
+  margin-top:-160px;margin-bottom:20px;margin-left:35px;
   border: 16px solid #d6f6fb;
   border-radius: 50%;
   border-top: 16px solid #0F111D;
@@ -200,6 +200,19 @@ function refres(){
     console.log('Error: ' + response.result.error.message);
   });
  }, 80000);
+}
+
+
+function switc(){
+  gapi.client.sheets.spreadsheets.values.update({
+      spreadsheetId: '11wbbgkr2eNk5OW1W1jILs4icsmCwcqtOt0HYTbak3MY',
+      range: 'lsb-sheet1!D1',
+      valueInputOption: "RAW",
+      values: [ ["pressed"] ]
+  }).then(function(response) {
+      console.log(response);
+      refres();
+  });
 }
 
 
