@@ -12,12 +12,12 @@ body{background: #0F111D;color:#d6f6fb;}
 #panglogin, #aircon_snapshot, #pangpindot{width:100%;margin-bottom:15px;}
 #ac{border:2px solid #d6f6fb;border-radius: 8px;width:100%;}
 button{background:#d6f6fb;color: #0F111D;padding:10px;}
-.loader {
-  margin-top:-100px;margin-bottom:20px;margin-left:35px;
-  border: 16px solid #f3f3f3;
+#loader {
+  margin-top:-200px;margin-bottom:20px;margin-left:35px;
+  border: 16px solid #d6f6fb;
   border-radius: 50%;
-  border-top: 16px solid blue;
-  border-bottom: 16px solid blue;
+  border-top: 16px solid #0F111D;
+  border-bottom: 16px solid #0F111D;
   width: 100px;
   height: 100px;
   -webkit-animation: spin 2s linear infinite;
@@ -154,6 +154,8 @@ function listMajors() {
     var range = response.result;
     var row = range.values[0];
     imahe(row[0],row[1]);
+    document.getElementById('loader').style.display = 'none';
+
 /*      if (range.values.length > 0) {
       for (i = 0; i < range.values.length; i++) {
         var row = range.values[i];
@@ -180,21 +182,24 @@ function magwrite(){
 
 
 function imahe(img,datetime){
-  document.getElementById('aircon_snapshot').innerHTML = "<img src='"+img+"' id='ac'/><p style='margin-top:-25px;margin-bottom:20px;margin-left:35px;'><b style='background:#000;color:#fff;font-size:12px' id='datetime'>"+datetime+"</b></p><div class='loader'></div>";
+  document.getElementById('aircon_snapshot').innerHTML = "<img src='"+img+"' id='ac'/><p style='margin-top:-25px;margin-bottom:20px;margin-left:35px;'><b style='background:#000;color:#fff;font-size:12px' id='datetime'>"+datetime+"</b></p><div id='loader'></div>";
 }
 
 function refres(){
-  alert('refres');
-  gapi.client.sheets.spreadsheets.values.get({
+  document.getElementById('loader').style.display = 'block';
+  setTimeout(function(){
+   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: '11wbbgkr2eNk5OW1W1jILs4icsmCwcqtOt0HYTbak3MY',
     range: 'lsb-sheet1!A1:C1',
   }).then(function(response) {
     var range = response.result;
     var row = range.values[0];
     imahe(row[0],row[1]);
+    document.getElementById('loader').style.display = 'none';
   }, function(response) {
     console.log('Error: ' + response.result.error.message);
   });
+ }, 80000);
 }
 
 
