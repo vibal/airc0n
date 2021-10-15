@@ -190,7 +190,7 @@ function refres(){
   }, function(response) {
     console.log('Error: ' + response.result.error.message);
   });
- }, 30000);
+ }, 65000);
 }
 
 
@@ -202,7 +202,6 @@ function switc(){
       values: [ ["pressed"] ]
   }).then(function(response) {
       console.log(response);
-      refres();
       refres();
   });
 }
