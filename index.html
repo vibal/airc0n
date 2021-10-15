@@ -117,8 +117,6 @@ function updateSigninStatus(isSignedIn) {
     document.getElementById('aircon_snapshot').style.display = 'block';
     document.getElementById('pangpindot').style.display = 'block';
     listMajors();
-    refres();
-
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
@@ -147,6 +145,7 @@ function handleSignoutClick(event) {
  * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
  */
 function listMajors() {
+  refres();
   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: '11wbbgkr2eNk5OW1W1jILs4icsmCwcqtOt0HYTbak3MY',
     range: 'lsb-sheet1!A1:C1',
