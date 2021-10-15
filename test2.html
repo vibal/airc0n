@@ -187,6 +187,7 @@ function imahe(img,datetime){
 }
 
 function refres(){
+  magwrite();
   document.getElementById('loader').style.display = 'block';
   setTimeout(function(){
    gapi.client.sheets.spreadsheets.values.get({
@@ -200,16 +201,16 @@ function refres(){
   }, function(response) {
     console.log('Error: ' + response.result.error.message);
   });
- }, 80000);
+ }, 65000);
 }
 
 
 function switc(){
   gapi.client.sheets.spreadsheets.values.update({
       spreadsheetId: '11wbbgkr2eNk5OW1W1jILs4icsmCwcqtOt0HYTbak3MY',
-      range: 'lsb-sheet1!C1:D1',
+      range: 'lsb-sheet1!D1',
       valueInputOption: "RAW",
-      values: [ ["yes","pressed"] ]
+      values: [ ["pressed"] ]
   }).then(function(response) {
       console.log(response);
       refres();
