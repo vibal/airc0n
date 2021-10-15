@@ -26,7 +26,6 @@ button{background:#d6f6fb;color: #0F111D;padding:10px;}
 
   <div id='aircon_snapshot'>
     <img src="https://via.placeholder.com/120x90/000000/d6f6fb?text=AC Snapshot" id="ac"/>
-    <p style='margin-top:-40px;margin-left:35px;'><b style='background:#000;color:#fff;font-size:30px' id='datetime'></b></p>
   </div>
 
   <div id='pangpindot'>
@@ -131,15 +130,16 @@ button{background:#d6f6fb;color: #0F111D;padding:10px;}
       range: 'lsb-sheet1!A1:C1',
     }).then(function(response) {
       var range = response.result;
-      if (range.values.length > 0) {
+      var row = range.values[0];
+      imahe(row[0],row[1]);
+/*      if (range.values.length > 0) {
         for (i = 0; i < range.values.length; i++) {
           var row = range.values[i];
-          imahe(row[0]);
-          datetime(row[1]);
+          imahe(row[0],row[1]);
         }
       } else {
         console.log('No data found.');
-      }
+      }*/
     }, function(response) {
       console.log('Error: ' + response.result.error.message);
     });
@@ -157,12 +157,10 @@ function magwrite(){
 }
 
 
-function imahe(img){
-  document.getElementById('aircon_snapshot').innerHTML = "<img src='"+img+"' id='ac'/>";
+function imahe(img,datetime){
+  document.getElementById('aircon_snapshot').innerHTML = "<img src='"+img+"' id='ac'/><p style='margin-top:-40px;margin-left:35px;'><b style='background:#000;color:#fff;font-size:30px' id='datetime'>"+datetime+"</b></p>";
 }
-function datetime(datetime){
-  document.getElementById('datetime').innerHTML = datetime;
-}
+
 
 
 </script>
