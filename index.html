@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=350, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"> 
 <style type="text/css">
 *{font-family: 'Roboto Mono', monospace;font-size: 13px}
@@ -117,7 +118,7 @@ function updateSigninStatus(isSignedIn) {
     document.getElementById('aircon_snapshot').style.display = 'block';
     document.getElementById('pangpindot').style.display = 'block';
     listMajors();
-    magwrite();
+    refres();
 
   } else {
     authorizeButton.style.display = 'block';
