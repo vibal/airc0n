@@ -9,7 +9,7 @@
 *{font-family: 'Roboto Mono', monospace;font-size: 13px}
 body{background: #0F111D;color:#d6f6fb;}
 #main{width:200px;margin:100px auto;}
-#panglogin, #aircon_snapshot{width:100%;margin-bottom:10px;}
+#panglogin, #aircon_snapshot, #pangpindot{width:100%;margin-bottom:10px;}
 #ac{border:2px solid #d6f6fb;border-radius: 8px;width:200px;}
 button{background:#d6f6fb;color: #0F111D;padding:10px;}
 </style>
@@ -26,7 +26,15 @@ button{background:#d6f6fb;color: #0F111D;padding:10px;}
 
   <div id='aircon_snapshot'>
     <img src="https://via.placeholder.com/120x90/000000/d6f6fb?text=AC Snapshot" id="ac"/>
+    <p style='margin-top:-40px;margin-left:35px;'><b style='background:#000;color:#fff;font-size:30px' id='datetime'></b></p>
   </div>
+
+  <div id='pangpindot'>
+    <button id="switch" style="width:50%;border:none;float:left; display: none;">ON/OFF</button>
+    <button id="refresh" style="width:50%;border:none;float:right; display: none;">Refresh</button>
+    <p style="clear:both;"></p>
+  </div>
+
 </div>  
 
 <script type="text/javascript">
@@ -125,7 +133,7 @@ button{background:#d6f6fb;color: #0F111D;padding:10px;}
         for (i = 0; i < range.values.length; i++) {
           var row = range.values[i];
           imahe(row[0]);
-
+          datetime(row[1]);
         }
       } else {
         console.log('No data found.');
@@ -150,7 +158,9 @@ function magwrite(){
 function imahe(img){
   document.getElementById('aircon_snapshot').innerHTML = "<img src='"+img+"' id='ac'/>";
 }
-
+function datetime(datetime){
+  document.getElementById('datetime').innerHTML = datetime;
+}
 
 
 </script>
